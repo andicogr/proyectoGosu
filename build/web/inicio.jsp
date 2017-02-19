@@ -48,6 +48,9 @@
                                   <%if(nombrePrivilegio.equals("administrador") || nombrePrivilegio.equals("ventas")){ %>
                                   <li> <a href="#">Ventas</a></li>
                                   <%}%>
+                                  <%if(nombrePrivilegio.equals("administrador") || nombrePrivilegio.equals("ventas")){ %>
+                                  <li> <a href="inicio.jsp?op=acciones">Reclamo Cliente</a></li>
+                                  <%}%>
                                 </ul>
                             </td>
                             <td style="width: 79%; height: 500px; position: relative;">
@@ -72,6 +75,14 @@
                                                 <%}%>
                                                 <%if(op.equals("editaruser")){%>
                                                 <%@include file="administrador/editarusuario.jsp" %>
+
+                                                <%}%>
+                                                <%if(op.equals("acciones")){%>
+                                                <%@include file="reclamoCliente/acciones.jsp" %>
+
+                                                <%}%>
+                                                <%if(op.equals("regrecl")){%>
+                                                <%@include file="reclamoCliente/registroreclamo.jsp" %>
 
                                                 <%}%>
 
