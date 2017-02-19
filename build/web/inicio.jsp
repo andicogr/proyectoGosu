@@ -51,7 +51,7 @@
                                 </ul>
                             </td>
                             <td style="width: 79%; height: 500px; position: relative;">
-                                <div style="margin-left: 25%;">
+                                <div style="margin-left: 0%;">
 
                                     <%if(session.getAttribute("IDusuario") !=null){ %>
 
