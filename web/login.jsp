@@ -1,47 +1,50 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <link href="css/login.css" type="text/css" rel="stylesheet"/>
+  <head>
+    <title>Bootstrap Admin Theme v3</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- styles -->
+    <link href="css/styles.css" rel="stylesheet">
+    <link href="css/login.css" rel="stylesheet">
 
-    </head>
-    
-    <body  >
-        <div id="formulario_login">
-            <form id="frmlogin" method="post" action="logearUsuario" name="frmlogin">
+  </head>
+  <body class="login-bg">
 
-                        <table >
-                            <tr>
-                                <td id="titPagina" colspan="2" align="center" >Ingreso</td>
-                            </tr>
-                            <tr id="user">
-                                <td >Usuario</td>
-                                <td><input type="text" name="txtusuario"  /></td>
+    <form id="frmlogin" method="post" action="logearUsuario" name="frmlogin">
+	<div class="page-content container">
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4">
+				<div class="login-wrapper">
+			        <div class="box">
+			            <div class="content-wrap">
+			                <h6>Ingreso</h6>
 
-                            </tr>
-                            <tr id="pass">
-                                <td  >Password</td>
-                                <td><input type="password" name="txtpassword" ></td>
-                            </tr>
-                            <tr id="betn" align="center">
-                                <td colspan="2" align="center"><input id="btnenviar" type="submit" value="Ingresar" name="ingresar"/>
-                            </tr>
-                            <tr>
-                                <td colspan="2"><font color="red">
-                                    <%if(session.getAttribute("mensaje") !=null){ %>
+			                <input class="form-control" type="text" name="txtusuario" placeholder="Usuario">
+			                <input class="form-control" type="password" name="txtpassword" placeholder="Clave">
+			                <div class="action">
+                                            <button class="btn btn-primary signup">Ingresar</button>
+			                </div>                
+			            </div>
+			        </div>
+
+			        <div class="already">
+			            <%if(session.getAttribute("mensaje") !=null){ %>
                                     <%=(String)request.getSession().getAttribute("mensaje") %> 
                                     <%}%>
-                                    </font>
+			        </div>
+			    </div>
+			</div>
+		</div>
+	</div>
+    </form>
 
-                                </td>
-                            </tr>
 
-                        </table>
 
-            </form>
-        </div>
-    </body>
- 
+    <script src="jquery/jquery.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/custom.js"></script>
+  </body>
 </html>
