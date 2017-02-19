@@ -10,6 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+         <link href="css/inicio.css" type="text/css" rel="stylesheet"/>
     </head>
     <body>
         <% String nombrePrivilegio = ""; %>
@@ -18,8 +19,18 @@
         <%}%>
         <table border="1" style="width: 100%">
             <tr>
-                <td style="height: 200px">
-                    Banner de la empresa
+                <td style="height: 200px;">
+                    <div id="div_banner" style="width:100%; ">
+                        <img src="imagenes/banner_principal.jpg"/>
+                    </div>
+                    
+                </td>
+            </tr>
+            <tr>
+                <td id="cerrar_sesion_link">
+                    <div style="float: right">
+                        <a  href="cerrarSession"  >Cerrar Sesion</a>
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -39,41 +50,42 @@
                                   <%}%>
                                 </ul>
                             </td>
-                            <td style="width: 79%; height: 500px">
+                            <td style="width: 79%; height: 500px; position: relative;">
+                                <div style="margin-left: 25%;">
+
+                                    <%if(session.getAttribute("IDusuario") !=null){ %>
+
+                                    <%String op=(String)request.getParameter("op");%>
+
+                                     <%if(op!=null){%>
+                                                <%if(op.equals("operaciones")){%>
+                                                <%@include file="administrador/operaciones.jsp" %>
+
+                                                <%}%>
+                                                <%if(op.equals("agregaruser")){%>
+                                                <%@include file="administrador/nuevousuario.jsp" %>
+
+                                                <%}%>
+                                                <%if(op.equals("listaruser")){%>
+                                                <%@include file="administrador/listarusuarios.jsp" %>
+
+                                                <%}%>
+                                                <%if(op.equals("editaruser")){%>
+                                                <%@include file="administrador/editarusuario.jsp" %>
+
+                                                <%}%>
 
 
-        <%if(session.getAttribute("IDusuario") !=null){ %>
-        
-        <%String op=(String)request.getParameter("op");%>
-            
-         <%if(op!=null){%>
-                    <%if(op.equals("operaciones")){%>
-                    <%@include file="administrador/operaciones.jsp" %>
-                   
-                    <%}%>
-                    <%if(op.equals("agregaruser")){%>
-                    <%@include file="administrador/nuevousuario.jsp" %>
-                   
-                    <%}%>
-                    <%if(op.equals("listaruser")){%>
-                    <%@include file="administrador/listarusuarios.jsp" %>
-                   
-                    <%}%>
-                    <%if(op.equals("editaruser")){%>
-                    <%@include file="administrador/editarusuario.jsp" %>
-                   
-                    <%}%>
-                    
-                    
-                    
-                    <%}else{%>
-                     <%@include file="prueba.jsp" %>
-            <%}%>
-            
-        <%}else{%>
-             <%@include file="sesionExpirada.jsp" %>
-        <%}%>
-         </td>
+
+                                                <%}else{%>
+                                                 <%@include file="prueba.jsp" %>
+                                        <%}%>
+
+                                    <%}else{%>
+                                         <%@include file="sesionExpirada.jsp" %>
+                                    <%}%>
+                                </div>
+                            </td>
                         </tr>
                     </table>
                 </td>

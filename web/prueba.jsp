@@ -13,8 +13,6 @@
     </head>
     <body>
 <h1>Hello World Prro!</h1>
-        <a href="cerrarSession"  >Cerrar Session</a>
-
         <form id="frmlogin" method="post" action="registrarProducto" name="frmlogin">
             
                     <table >

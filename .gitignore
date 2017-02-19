@@ -8,3 +8,4 @@
 *.netbeans*
 *.dfp
 *_jsp*
+/build/
