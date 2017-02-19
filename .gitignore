@@ -1,0 +1,10 @@
+*.class
+*.properties
+*.smap
+*.xml
+*.jar
+*.MF
+*.war
+*.netbeans*
+*.dfp
+*_jsp*
