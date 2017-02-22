@@ -50,7 +50,7 @@ public class servletUsuario extends HttpServlet {
           String email=request.getParameter("txtEmail");
           int celular= Integer.parseInt(request.getParameter("txtcelular")) ;
           int fijo=Integer.parseInt(request.getParameter("txttelfijo"));
-          Date fechaingreso=Date.valueOf(request.getParameter("txtfecha"));
+          //Date fechaingreso=Date.valueOf(request.getParameter("txtfecha"));
           
           
           usuarioBeans ruser = new usuarioBeans();
@@ -65,7 +65,7 @@ public class servletUsuario extends HttpServlet {
           ruser.setEMAIL(email);
           ruser.setCELULAR(celular);
           ruser.setFIJO(fijo);
-          ruser.setFECHAINGRESO(fechaingreso);
+          //ruser.setFECHAINGRESO(fechaingreso);
           
           
           String msg =usuarioDAO.insertarUsuario(ruser);
@@ -95,7 +95,7 @@ public class servletUsuario extends HttpServlet {
           String email=request.getParameter("EmailEdit");
           int celular= Integer.parseInt(request.getParameter("celularEdit")) ;
           int fijo=Integer.parseInt(request.getParameter("FijoEdit"));
-          Date fechaingreso=Date.valueOf(request.getParameter("fechaEdit"));
+          //Date fechaingreso=Date.valueOf(request.getParameter("fechaEdit"));
           
           
           usuarioBeans euser = new usuarioBeans();
@@ -111,7 +111,7 @@ public class servletUsuario extends HttpServlet {
           euser.setEMAIL(email);
           euser.setCELULAR(celular);
           euser.setFIJO(fijo);
-          euser.setFECHAINGRESO(fechaingreso);
+          //euser.setFECHAINGRESO(fechaingreso);
           
           
           String msg =usuarioDAO.editarUsuario(euser);

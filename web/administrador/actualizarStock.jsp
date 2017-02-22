@@ -1,33 +1,73 @@
-<%-- 
-    Document   : actualizarStock
-    Created on : 20-feb-2017, 1:47:32
-    Author     : Raul
---%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="com.pe.grupoads.beans.productoBeans"%>
+           
+<script src="jquery/jquery.js"></script>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <body>
-            <form id="frmRegis" method="post" action="actualizarproducto" name="frmregister">
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>"Actualizar Producto"</title>
-    </head>
-    <%ArrayList<productoBeans> list=(ArrayList<productoBeans>)request.getAttribute("pro");%>
-    <select name="selecproducto">
-        <%for(productoBeans x:list){ %>
-        <option  value="<%=x.getCodproducto() %>"><%=x.getNombproducto() %></option>
-    <% } %>
-    </select>
-    <input type="text" name="txtCantidad">
-    <input type="submit" name="Actualizar" value="Actualizar">
-    
-        </form>
-         </body>
-</head>
-        
+    <div class="content-box-large">
 
+        <div class="panel-body">
+            <form class="form-horizontal" role="form" action="actualizarproducto">
+                <fieldset>
+                    <legend>Actualizar Stock</legend>
+                    <div class="form-group">
+                        <label for="nombreProducto" class="col-sm-2 control-label">Producto</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="nombreProducto" id="nombreProducto">
+                            <input type="hidden" class="form-control" name="selecproducto" id="selecproducto">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtCantidad" class="col-sm-2 control-label">Cantidad</label>
+                        <div class="col-sm-1">
+                            <input type="text" class="form-control" name="txtCantidad" id="txtCantidad">
+                        </div>
+                    </div>				
+                </fieldset>
+                <br/>
+                <fieldset>
+                    <legend></legend>
+                    <div class="form-group">
 
-</html>
+                        <div class="col-sm-2">
+                            <button type="submit" class="btn btn-primary">Actualizar Stock</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+<script type="text/javascript">
+$( function() {
+    $("#nombreProducto").autocomplete({
+        source : function(request, response) {
+        $.ajax({
+                url : "autocompletarProductoStock",
+                type : "GET",
+                data : {
+                        nombreProducto : $("#nombreProducto").val()
+                },
+                dataType : "json",
+                success : function(data) {
+                    var items = data;
+                    response(items);
+                }
+             });
+            },
+        minLength: 2,
+        select: function( event, ui ) {
+            $("#selecproducto").val(ui.item.id);
+            
+        }
+    });
+
+$(document).ready(function() {
+  $(window).keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+
+} );
+
+</script>

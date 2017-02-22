@@ -5,7 +5,7 @@
  */
 package com.pe.grupoads.beans;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
  *
@@ -18,7 +18,8 @@ public class reclamoBeans {
     private String asunto;
     private String descripcion;
     private String solucion;
-    private String  codcliente;
+    private Integer  codcliente;
+    private Integer codigoProforma;
 
     public String getCodigoreclamo() {
         return codigoreclamo;
@@ -68,12 +69,20 @@ public class reclamoBeans {
         this.solucion = solucion;
     }
 
-    public String getCodcliente() {
+    public Integer getCodcliente() {
         return codcliente;
     }
 
-    public void setCodcliente(String codcliente) {
+    public void setCodcliente(Integer codcliente) {
         this.codcliente = codcliente;
+    }
+
+    public Integer getCodigoProforma() {
+        return codigoProforma;
+    }
+
+    public void setCodigoProforma(Integer codigoProforma) {
+        this.codigoProforma = codigoProforma;
     }
     
     

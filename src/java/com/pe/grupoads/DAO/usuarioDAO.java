@@ -81,7 +81,7 @@ public class usuarioDAO {
         String msg=null;
         Connection cn = conexion.abrir();
         try {
-            PreparedStatement ps =  cn.prepareStatement("insert into usuario(idlogin,idpassword,estado,dni,nombre,apellidopaterno,apellidomaterno,direccion,email,celular,fijo,fechaingreso) values(?,?,?,?,?,?,?,?,?,?,?,?)");
+            PreparedStatement ps =  cn.prepareStatement("insert into usuario(idlogin,idpassword,estado,dni,nombre,apellidopaterno,apellidomaterno,direccion,email,celular,fijo) values(?,?,?,?,?,?,?,?,?,?,?)");
            
            
            ps.setString(1,usu.getIDLOGIN());
@@ -95,7 +95,7 @@ public class usuarioDAO {
            ps.setString(9,usu.getEMAIL());
            ps.setInt(10,usu.getCELULAR());
            ps.setInt(11,usu.getFIJO());
-           ps.setDate(12,(Date)usu.getFECHAINGRESO());
+           //ps.setDate(12,(Date)usu.getFECHAINGRESO());
              
            ps.executeUpdate();
              msg="se insertó usuario";
@@ -159,7 +159,7 @@ public class usuarioDAO {
         String msg=null;
         Connection cn = conexion.abrir();
         try {
-            PreparedStatement ps =  cn.prepareStatement("update usuario set codusuario=?, dni=?,idlogin=?,idpassword=?,estado=?,nombre=?,apellidopaterno=?,apellidomaterno=?,direccion=?,email=?,celular=?,fijo=?,fechaingreso=? where codusuario='"+usu.getCODIGOUSUARIO()+"'");
+            PreparedStatement ps =  cn.prepareStatement("update usuario set codigousuario=?, dni=?,idlogin=?,idpassword=?,estado=?,nombre=?,apellidopaterno=?,apellidomaterno=?,direccion=?,email=?,celular=?,fijo=? where codigousuario='"+usu.getCODIGOUSUARIO()+"'");
            ps.setInt(1,usu.getCODIGOUSUARIO());
            ps.setInt(2, usu.getDNI());
            ps.setString(3, usu.getIDLOGIN());
@@ -172,7 +172,7 @@ public class usuarioDAO {
            ps.setString(10, usu.getEMAIL());
            ps.setInt(11,usu.getCELULAR());
            ps.setInt(12, usu.getFIJO());
-           ps.setDate(13, usu.getFECHAINGRESO());
+           //ps.setDate(13, usu.getFECHAINGRESO());
              ps.executeUpdate();
              msg="Se Edito Usuario Correctamente";
         
@@ -189,7 +189,7 @@ public class usuarioDAO {
        
         try
         {
-            PreparedStatement  ps=cn.prepareStatement("select *from  usuario where codusuario='"+id+"' ");
+            PreparedStatement  ps=cn.prepareStatement("select codigousuario, dni, idlogin, idpassword,estado, nombre, apellidopaterno, apellidomaterno, direccion, email, celular, fijo, fechaingreso from  usuario where codigousuario="+id+" ");
              ResultSet rs=ps.executeQuery();
             
             while(rs.next())

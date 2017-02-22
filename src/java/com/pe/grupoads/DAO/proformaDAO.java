@@ -110,7 +110,7 @@ public class proformaDAO {
         cn= conexion.abrir();
  
         try{
-            String sql = "select p.codproforma, p.importeproforma, p.fechaemisionproforma from proforma p "
+            String sql = "select p.codproforma, p.importeproforma, p.fechaemisionproforma, p.estado from proforma p "
                     + "where  p.codproforma = " + idProforma;
             PreparedStatement  ps=cn.prepareStatement(sql);
             ResultSet rs=ps.executeQuery();
@@ -120,6 +120,7 @@ public class proformaDAO {
                 proforma.setCodProforma(rs.getInt(1));
                 proforma.setInportePorforma(rs.getDouble(2));
                 proforma.setFechaEmision(rs.getDate(3));
+                proforma.setEstado(rs.getString(4));
                 ArrayList<detalleProformaBeans> detalle = obtenerDetalleProformasPorId(rs.getInt(1));
                 proforma.setDetalle(detalle);
             }

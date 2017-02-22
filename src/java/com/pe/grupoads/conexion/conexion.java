@@ -12,7 +12,7 @@ public class conexion
         Connection cn=null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            cn= DriverManager.getConnection("jdbc:mysql://localhost/farmacia_ads", "root", "perugano");
+            cn= DriverManager.getConnection("jdbc:mysql://localhost/farmacia_farmalave", "root", "root");
         } catch (Exception ex) {
            System.out.println("Error en la conexion a la base de datos "+ ex);
         }

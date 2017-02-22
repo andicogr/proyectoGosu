@@ -4,81 +4,120 @@
     Author     : Raul
 --%>
 
-<%@page import="java.util.ArrayList"%>
-<%@page import="com.pe.grupoads.beans.usuarioBeans"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-                <form id="frmRegisrecl" method="post" action="registrarReclamo" name="frmregisrecl">
+
+
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.text.DateFormat"%>
+<%@page import="java.util.Date"%>
+<script src="jquery/jquery.js"></script>
+
+    <div class="content-box-large">
+
+        <div class="panel-body">
+            <form class="form-horizontal" role="form" action="registrarReclamo">
          <% Integer idUsuario = (Integer) session.getAttribute("IDusuario");%>
          <% String nombreUsuario = (String) session.getAttribute("usuario");%>
-         <script > 
-             function abrirVentana(url) {
-                 window.open("reclamoCliente/verificarStock.jsp"
-             ,Verificar Stock,"width=400,height=400,resizable=false");
-         }
-          </script>   
-             
-         
-          <a href="#" onclick="abrirVentana(reclamoCliente/verificarStock.jsp)">Verificar Stock</a>
-                                          
-        <table border="1">
-           
-            <TR>
-                <td colspan="2">Registro de Reclamo</td>
-            </TR>
-            
-            <tr>
-                <td >Codigo</td>
-                <td ><input type="text" name="txtcodrecl" size="70"/></td>
-            </tr>
-             <tr>
-                <td >Usuario</td>
-                <td ><input type="text" name="txtcodrecl" readonly="readonly" value="<%=nombreUsuario%>" size="70"/></td>
-            </tr>
-            <tr>
-                <td >Fecha</td>
-                <td ><input type="date" name="txtfecha" size="70"/></td>
-            </tr>
-            <tr>
-                <td >Asunto</td>
-                <td ><input type="text" name="txtasunto" size="70"/></td>
-            </tr>
-            <tr>
-                <td >Solucion</td>
-                  <td >
-            <select name="selecsolu">
-                 
-                 <option>Si</option>
-                 <option>No</option>
-                 
-             </select>
-             
-              </td>
-            </tr>
-            <tr>
-                <td >Descripcion</td>
-                <td ><input type="text" name="txtdescrip" size="70"/></td>
-            </tr>
-           
-           
-            <tr><td colspan="2"  align="center">
-           <%String mensaje2=request.getParameter("msg");
+                <fieldset>
+                    <legend>Registrar Reclamo</legend>
+                        <div class="form-group">
+                          <label for="numeroProforma" class="col-sm-2 control-label">Numero Proforma</label>
+                          <div class="col-sm-4">
+                              <input type="text" class="form-control" required="true" name="numeroProforma" id="numeroProforma" onchange="validarNumeroProforma()">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="dniCliente" class="col-sm-2 control-label">DNI Cliente</label>
+                          <div class="col-sm-2">
+                              <input type="text" class="form-control" required="true" name="dniCliente" id="dniCliente" onchange="obtenerClientePorDNI()">
+                             <input type="hidden" class="form-control" name="idCliente" id="idCliente">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="nombreCliente" class="col-sm-2 control-label">Nombre Cliente</label>
+                          <div class="col-sm-4">
+                             <input type="text" class="form-control" required="true" name="nombreCliente" id="nombreCliente">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="nombreUsuario" class="col-sm-2 control-label">Usuario</label>
+                          <div class="col-sm-4">
+                              <input type="text" class="form-control" readonly="readonly" name="nombreUsuario" value="<%=nombreUsuario%>">
+                              <input type="hidden" class="form-control" name="idUsuario" id="idUsuario" value="<%=idUsuario%>">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="txtfecha" class="col-sm-2 control-label">Fecha</label>
+                          <div class="col-sm-2">
+                              <% Date today = new Date(); 
+                                  DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                             %>
+                             <input type="text" readonly="readonly" class="form-control" name="txtfecha" id="txtfecha" value="<%=dateFormat.format(today)%>">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="asunto" class="col-sm-2 control-label">Asunto</label>
+                          <div class="col-sm-4">
+                             <input type="text" class="form-control" name="asunto" id="asunto">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="descripcion" class="col-sm-2 control-label">Descripcion</label>
+                            <div class="col-sm-6">
+                                <textarea class="form-control" name="descripcion" id="descripcion" rows="5"></textarea>
+                            </div>
+                        </div>
+                </fieldset>
+                                     <%String mensaje2=request.getParameter("msg");
           if(mensaje2!=null){out.println(mensaje2);}%>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" align="center"><input id="btnenvi"type="submit" value="Registrar" name="registrar"/>
-                 <input id="btncancel" type="reset" value="Limpiar" name="cancelar"/></td>
-            </tr>
-             
-           
-        </table>
-        </form>
-    </body>
-</html>
+                <br/>
+                <fieldset>
+                    <legend></legend>
+                    <div class="form-group">
+
+                        <div class="col-sm-2">
+                            <button type="submit" class="btn btn-primary">Registrar</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+<script type="text/javascript">
+$( function() {
+$(document).ready(function() {
+  $(window).keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+
+
+} );
+
+function validarNumeroProforma(){
+    var numeroProforma = $("#numeroProforma").val();
+    $.get("validarNumeroProforma", {numeroProforma: numeroProforma}, function(response){
+        if(response === "incorrecto"){
+           $("#numeroProforma").val("");
+           alert("El numero de proforma no existe");
+       }
+    });
+}
+
+function obtenerClientePorDNI(){
+    var dniCliente = $("#dniCliente").val();
+    $.get("obtenerClientePorDni",{dniCliente: dniCliente}, function(response){
+        if(response===null){
+            alert("Cliente Nuevo!!");
+            $("#nombreCliente").val("");
+            $("#idCliente").val("");
+        }else{
+            $("#idCliente").val(response.codCliente);
+            $("#nombreCliente").val(response.nombreCliente);
+        }
+    });
+}
+</script>

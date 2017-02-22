@@ -9,3 +9,4 @@
 *.dfp
 *_jsp*
 /build/
+/dist/

@@ -15,6 +15,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -163,28 +164,42 @@ public class productoDAO {
             return lista;
     }
     
-    public static String insertarProducto(productoBeans prod)
-    {
-        String msg=null;
+    public static Integer insertarProducto(productoBeans producto){
+        Connection cn = conexion.abrir();
+        Integer idProducto = null;
+        try {
+            String sql = "insert into productos(nombproducto,descripcion,precioventa,stock,receta) values(?,?,?,?,?)";
+            PreparedStatement ps =  cn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, producto.getNombproducto());
+            ps.setString(2, producto.getDescripcion());
+            ps.setDouble(3, producto.getPrecioventa());
+            ps.setInt(4, producto.getStock());
+            ps.setString(5, producto.getReceta());
+            ps.executeUpdate();
+
+            ResultSet rs = ps.getGeneratedKeys();
+            if(rs.next()){
+                idProducto = rs.getInt(1);
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("Error en insertarProducto " + ex);
+        }
+        return idProducto;
+    }
+    
+    public static void insertarComponenetesPorProducto(Integer idComponente, Integer idProducto){
         Connection cn = conexion.abrir();
         try {
-            PreparedStatement ps = (PreparedStatement) cn.prepareStatement("insert into productos(nombproducto,descripcion,precioventa,fechavencimiento,stock,unidad,receta,codcategoria,codmarca) values(?,?,?,?,?,?,?,?,?)");
-           ps.setString(1, prod.getNombproducto());
-           ps.setString(2, prod.getDescripcion());
-           ps.setDouble(3, prod.getPrecioventa());
-           ps.setDate(4,(Date)prod.getFechavencimiento());
-           ps.setInt(5, prod.getStock());
-           ps.setString(6, prod.getUnidad());
-           ps.setString(7, prod.getReceta());
-           ps.setString(8, prod.getCodcategoria());
-           ps.setString(9, prod.getCodmarca());
-           
-             ps.executeUpdate();
-             msg="Producto Ingresado";
-        
+            String sql = "insert into productocomponente(codproducto,codcomponente) values(?,?)";
+
+            PreparedStatement ps =  cn.prepareStatement(sql);
+            ps.setInt(1, idProducto);
+            ps.setInt(2, idComponente);
+            ps.executeUpdate();
+
         } catch (SQLException ex) {
-           msg=ex.getMessage();
+            System.out.println("Error en insertarComponenetesPorProducto " + ex);
         }
-        return msg;
     }
 }

@@ -1,75 +1,138 @@
-<%-- 
-    Document   : nuevoProducto
-    Created on : 20-feb-2017, 1:47:15
-    Author     : Raul
---%>
+            
+<script src="jquery/jquery.js"></script>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-       <form id="frmRegis" method="post" action="" name="frmregister">
-        <table>
-            <TR>
-                <td colspan="2">Registrar Nuevo Producto</td>
-            </TR>
+    <div class="content-box-large">
+
+        <div class="panel-body">
+            <form class="form-horizontal" role="form" action="registrarProductoServlet">
+                <fieldset>
+                    <legend>Nuevo Producto</legend>
+                    <div class="form-group">
+                        <label for="nombreProducto" class="col-sm-2 control-label">Nombre</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="nombreProducto" id="nombreProducto">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="precioVenta" class="col-sm-2 control-label">Precio Venta</label>
+                        <div class="col-sm-1">
+                            <input type="text" class="form-control" name="precioVenta" id="precioVenta">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="stockInicial" class="col-sm-2 control-label">Stock Inicial</label>
+                        <div class="col-sm-1">
+                            <input type="text" class="form-control" name="stockInicial" id="stockInicial">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="receta" class="col-sm-2 control-label">Receta</label>
+                        <div class="col-sm-1">
+                            <select name="receta" id="receta" class="form-control" id="select-1">
+                                <option value="si">Si</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion" class="col-sm-2 control-label">Descripcion</label>
+                        <div class="col-sm-6">
+                            <textarea class="form-control" name="descripcion" id="descripcion" rows="5"></textarea>
+                        </div>
+                    </div>				
+                </fieldset>
+
+                <fieldset>
+                    <legend>Componentes</legend>
+                    <div class="form-group">
+                        <label for="nombreComponente" class="col-sm-1 control-label">Componente</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" name="nombreComponente" id="nombreComponente">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-8">
+                            <table class="table table-condensed" id="tableListaComponentes">
+                                <tr>
+                                    <th style="width: 250px">Componente</th>
+                                    <th style="width: 100px">Concentracion</th>
+                                    <th style="width: 100px">Unidad</th>
+                                    <th style="width: 100px">Eliminar</th>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </fieldset>
+                <br/>
+                <fieldset>
+                    <legend></legend>
+                    <div class="form-group">
+
+                        <div class="col-sm-2">
+                            <button type="submit" class="btn btn-primary">Registrar</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+<script type="text/javascript">
+$( function() {
+    $('#tableListaComponentes').on('click', 'input[type="button"]', function () {
+        $(this).closest('tr').remove();
+    });
+
+    $("#nombreComponente").autocomplete({
+        source : function(request, response) {
+        $.ajax({
+                url : "autocompletarComponente",
+                type : "GET",
+                data : {
+                        nombreComponente : $("#nombreComponente").val()
+                },
+                dataType : "json",
+                success : function(data) {
+                    var items = data;
+                    response(items);
+                }
+             });
+            },
+        minLength: 2,
+        select: function( event, ui ) {
+            $("#nombreComponente").val("");
+            agregarComponente(ui.item.id, ui.item.nombre, ui.item.concentracion, ui.item.unidad);
             
-            <tr>
-                <td id="col1"></td>
-                <td id="col2"><input type="hidden" name="txtcodpro" size="70"/></td>
-            </tr>
-             <tr>
-                <td id="col1">Nombre del Producto</td>
-                <td id="col2"><input type="text" name="txtnompro" size="70"/></td>
-            </tr>
-            <tr>
-                <td id="col1">Descripcion</td>
-                <td id="col2"><input type="text" name="txtdescripcion" size="70"/></td>
-            </tr>
-            <tr>
-                <td id="col1">Precio Venta</td>
-                <td id="col2"><input type="number" name="txtprecio" size="70"/></td>
-            </tr>
-            <tr>
-                <td id="col1">Cantidad</td>
-                <td id="col2"><input type="number" name="txtstock" size="70"/></td>
-            </tr>
-            <tr>
-                <td id="col1">Componentes</td>
-                <td id="col2"><input type="number" name="txtstock" size="70"/></td>
-            </tr>
-           <tr>
-                 <td id="col1">Receta</td>
-                  <td id="col2">
-            <select name="selecreceta">
-                <option>Si</option>
-                 <option>No</option>
-            </select>
-             
-              </td>
-            <tr>
-                <td id="col1">Fecha Vencimiento</td>
-                <td id="col2"><input type="date" name="txtfechavenc" size="70"/></td>
-            </tr>
-            
-             
-           
-            <tr><td colspan="2" id="msg" align="center">
-           <%String mensaje1=request.getParameter("msg");
-          if(mensaje1!=null){out.println(mensaje1);}%>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" align="center"><input id="btnenviar"type="submit" value="Registrar" name="registrar"/>
-                 <input id="btncancelar" type="reset" value="Limpiar" name="cancelar"/></td>
-            </tr>
-             
-           
-        </table>
-        </form>
-    </body>
-</html>
+        }
+    });
+
+$(document).ready(function() {
+  $(window).keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+
+} );
+
+function agregarComponente(idComponente, nombre, concentracion, unidad){
+
+    var filas = document.getElementById("tableListaComponentes").rows.length;
+    var x = document.getElementById("tableListaComponentes").insertRow(filas);
+
+    var col1 = x.insertCell(0);
+    var col2 = x.insertCell(1);
+    var col3 = x.insertCell(2);
+    var col4 = x.insertCell(3);
+
+
+    col1.innerHTML = " <input type='hidden' name='idComponentes' id='idComponentes' value='" + idComponente + "'> " + nombre;
+    col2.innerHTML = concentracion;
+    col3.innerHTML = unidad;
+    col4.innerHTML = '<input type="button" class="btn btn-danger btn-sm" value="Eliminar" />';
+
+
+}
+</script>

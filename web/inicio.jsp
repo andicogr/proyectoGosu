@@ -65,7 +65,7 @@
             <div class="sidebar content-box" style="display: block;">
                 <ul class="nav">
                     <% String nombrePrivilegio = ""; %>
-                    <%if(session.getAttribute("privilegio") !=null){ %>
+                    <%if(session.getAttribute("privilegio") != null){ %>
                     <% nombrePrivilegio = (String)request.getSession().getAttribute("privilegio"); %> 
                     <%}%>
                     <%if(nombrePrivilegio.equals("administrador")){ %>
@@ -108,11 +108,11 @@
              </div>
 		  </div>
 		  <div class="col-md-10">
-                        <%if(session.getAttribute("IDusuario") !=null){ %>
+                        <%if(session.getAttribute("IDusuario") != null){ %>
 
                         <%String op=(String)request.getParameter("op");%>
 
-                         <%if(op!=null){%>
+                         <%if(op != null){%>
                                     <%if(op.equals("operaciones")){%>
                                     <%@include file="administrador/operaciones.jsp" %>
 

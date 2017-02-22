@@ -12,43 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-<h1>Hello World Prro!</h1>
-        <form id="frmlogin" method="post" action="registrarProducto" name="frmlogin">
-            
-                    <table >
-                        <tr>
-                            <td id="titPagina" colspan="2" align="center" >Registrar Producto</td>
-                        </tr>
-                        <tr id="user">
-                            <td >Producto*</td>
-                            <td><input type="text" name="txtusuario" /></td>
-                            
-                        </tr>
-                        <tr id="pass">
-                            <td  >Cantidad*</td>
-                            <td><input type="text" name="txtpassword" ></td>
-                        </tr>
-                        <tr id="descrip">
-                            <td  >Descripcion*</td>
-                            <td><input type="text" name="txtDescricion" ></td>
-                        </tr>
-                        <tr id="betn" align="center">
-                            <td colspan="2" align="center"><input id="btnenviar" type="submit" value="Registrar" name="ingresar"/>
-                        </tr>
-                        <tr>
-                            <td colspan="2"><font color="red">
-                                <%if(session.getAttribute("mensajeProducto") !=null){ %>
-                                <%=(String)request.getSession().getAttribute("mensajeProducto") %> 
-                                <%}%>
-                                </font>
-                                                               
-                            </td>
-                        </tr>
-                        
-                    </table>
+        <h1>Bienvenidos</h1>
                    
-        </form>
-                                
-                     
     </body>
 </html>

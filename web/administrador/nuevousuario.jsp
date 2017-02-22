@@ -1,95 +1,95 @@
-<%-- 
-    Document   : nuevousuario
-    Created on : 06-feb-2017, 0:28:10
-    Author     : Raul
---%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <form id="frmRegis" method="post" action="registrarUsuario" name="frmregister">
-        <table>
-            <TR>
-                <td colspan="2">Registro de Nuevo Usuario</td>
-            </TR>
-            
-            <tr>
-                <td id="col1">Nombres</td>
-                <td id="col2"><input type="text" name="txtNombres" size="70"/></td>
-            </tr>
-             <tr>
-                <td id="col1">Apellido paterno</td>
-                <td id="col2"><input type="text" name="txtApellidoPat" size="70"/></td>
-            </tr>
-            <tr>
-                <td id="col1">Apellido materno</td>
-                <td id="col2"><input type="text" name="txtApellidoMat" size="70"/></td>
-            </tr>
-            <tr>
-                <td id="col1">DNI</td>
-                <td id="col2"><input type="number" name="txtDNI" size="70"/></td>
-            </tr>
-            <tr>
-                <td id="col1">Id Login</td>
-                <td id="col2"><input type="text" name="txtidlogin" size="70"/></td>
-            </tr>
-            <tr>
-                <td id="col1">Contraseña</td>
-                <td id="col2"><input type="password" name="txtpassword" size="70"/></td>
-            </tr>
-            <tr>
-                <td id="col1">Dirección</td>
-                <td id="col2"><input type="text" name="txtdireccion" size="70"/></td>
-            </tr>
-            
-             <tr>
-                <td id="col1">Email</td>
-                <td id="col2"><input type="text" name="txtEmail" size="70"/></td>
-            </tr>
-           <tr>
-                <td id="col1">Celular</td>
-                <td id="col2"><input type="number" name="txtcelular" size="70"/></td>
-            </tr>
-            <tr>
-                <td id="col1">Telefono Fijo</td>
-                <td id="col2"><input type="number" name="txttelfijo" size="70"/></td>
-            </tr>
-            <tr>
-                <td id="col1">Fecha ingreso</td>
-                <td id="col2"><input type="date" name="txtfecha" size="70"/></td>
-            </tr>
-             <tr>
-                  
-                  <td id="col1">Estado</td>
-                  <td id="col2">
-                  
-             <select name="selecestado">
-                 
-                 <option>Activo</option>
-                 <option>Inactivo</option>
-                 
-             </select>
-             
-              </td>
-            </tr>
-           
-            <tr><td colspan="2" id="msg" align="center">
-           <%String mensaje1=request.getParameter("msg");
-          if(mensaje1!=null){out.println(mensaje1);}%>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" align="center"><input id="btnenviar"type="submit" value="Registrar" name="registrar"/>
-                 <input id="btncancelar" type="reset" value="Limpiar" name="cancelar"/></td>
-            </tr>
-             
-           
-        </table>
-        </form>
-    </body>
-</html>
+
+    <div class="content-box-large">
+
+        <div class="panel-body">
+            <form class="form-horizontal" role="form" action="registrarUsuario">
+                <fieldset>
+                    <legend>Registrar Usuario</legend>
+                    <div class="form-group">
+                      <label for="txtNombres" class="col-sm-2 control-label">Nombres</label>
+                      <div class="col-sm-4">
+                         <input type="text" class="form-control" name="txtNombres">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="txtApellidoPat" class="col-sm-2 control-label">Apellido Paterno</label>
+                      <div class="col-sm-4">
+                         <input type="text" class="form-control" name="txtApellidoPat">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="txtApellidoMat" class="col-sm-2 control-label">Apellido Materno</label>
+                      <div class="col-sm-4">
+                         <input type="text" class="form-control" name="txtApellidoMat">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="txtDNI" class="col-sm-2 control-label">DNI</label>
+                      <div class="col-sm-2">
+                         <input type="text" class="form-control" name="txtDNI">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="txtidlogin" class="col-sm-2 control-label">Login</label>
+                      <div class="col-sm-2">
+                         <input type="text" class="form-control" name="txtidlogin">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="txtpassword" class="col-sm-2 control-label">Password</label>
+                      <div class="col-sm-2">
+                          <input type="password" class="form-control" name="txtpassword">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="txtdireccion" class="col-sm-2 control-label">Direccion</label>
+                      <div class="col-sm-4">
+                         <input type="text" class="form-control" name="txtdireccion">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="txtEmail" class="col-sm-2 control-label">Email</label>
+                      <div class="col-sm-4">
+                         <input type="text" class="form-control" name="txtEmail">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="txtcelular" class="col-sm-2 control-label">Celular</label>
+                      <div class="col-sm-2">
+                         <input type="text" class="form-control" name="txtcelular">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="txttelfijo" class="col-sm-2 control-label">Telefono Fijo</label>
+                      <div class="col-sm-2">
+                         <input type="text" class="form-control" name="txttelfijo">
+                      </div>
+                    </div>
+                     <div class="form-group">
+                        <label for="selecestado" class="col-sm-2 control-label">Estado</label>
+                        <div class="col-sm-2">
+                            <select name="selecestado" id="receta" class="form-control" id="select-1">
+                                <option value="Activo">Activo</option>
+                                <option value="Inactivo">Inactivo</option>
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+                <br/>
+
+                    <%String mensaje1=request.getParameter("msg");
+                   if(mensaje1!=null){out.println(mensaje1);}%>
+
+                <fieldset>
+                    <legend></legend>
+                    <div class="form-group">
+
+                        <div class="col-sm-2">
+                            <button type="submit" class="btn btn-primary">Registrar</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
