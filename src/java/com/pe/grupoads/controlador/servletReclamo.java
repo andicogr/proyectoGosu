@@ -14,6 +14,7 @@ import com.pe.grupoads.DAO.proformaDAO;
 import com.pe.grupoads.DAO.reclamoDAO;
 import com.pe.grupoads.beans.clienteBeans;
 import com.pe.grupoads.beans.componenteBeans;
+import com.pe.grupoads.beans.detalleProformaBeans;
 import com.pe.grupoads.beans.productoBeans;
 import com.pe.grupoads.beans.proformaBeans;
 import com.pe.grupoads.beans.reclamoBeans;
@@ -88,6 +89,13 @@ public class servletReclamo extends HttpServlet {
 
             String msg =reclamoDAO.registrarReclamo(rerecl);
             proformaDAO.anularProforma(numeroProforma);
+            
+            
+            ArrayList<detalleProformaBeans> detalle = proformaDAO.obtenerDetalleProformasPorId(numeroProforma);
+            
+            for(detalleProformaBeans x: detalle){
+                productoDAO.actualizarStockProducto(x.getCodProducto(), x.getCantidad());
+            }
 
             response.sendRedirect("inicio.jsp?op=regrecl&msg='"+msg+"'");
              
