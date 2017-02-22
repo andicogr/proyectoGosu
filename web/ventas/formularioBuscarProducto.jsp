@@ -27,6 +27,8 @@
                     </div>
                   </div>
                 </fieldset>
+                
+                
                 <div>
                     <h4>Detalle Producto</h4>
                     <p>

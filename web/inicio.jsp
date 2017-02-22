@@ -28,7 +28,7 @@
 	           <div class="col-md-5">
 	              <!-- Logo -->
 	              <div class="logo">
-	                 <h1><a href="#">Farmacia de Raul El Papi</a></h1>
+	                 <h1><a href="#">Farmacia  tacza ctmr</a></h1>
 	              </div>
 	           </div>
 	           <div class="col-md-5">
@@ -82,7 +82,17 @@
                         </li>
                     <%}%>
                     <%if(nombrePrivilegio.equals("administrador")){ %>
-                    <li> <a href="#">Registrar Producto</a></li>
+                        <li class="submenu">
+                             <a href="#">
+                                <i class=""></i> Registrar Producto
+                                <span class="caret pull-right"></span>
+                             </a>
+                             <!-- Sub menu -->
+                             <ul>
+                                <li><a href="listarpro">Actualizar Stock</a></li>
+                                <li><a href="inicio.jsp?op=registrarpro">Registar nuevo producto</a></li>
+                            </ul>
+                        </li>
                     <%}%>
                     <%if(nombrePrivilegio.equals("administrador") || nombrePrivilegio.equals("ventas")){ %>
                     <li> <a href="inicio.jsp?op=vender_producto">Ventas</a></li>
@@ -90,7 +100,9 @@
                     <%if(nombrePrivilegio.equals("administrador") || nombrePrivilegio.equals("cajero")){ %>
                     <li> <a href="inicio.jsp?op=cajero">Caja</a></li>
                     <%}%>
-       
+                    <%if(nombrePrivilegio.equals("administrador") || nombrePrivilegio.equals("ventas")){ %>
+                    <li> <a href="inicio.jsp?op=regrecl">Reclamo Cliente</a></li>
+                    <%}%>
 
                 </ul>
              </div>
@@ -141,6 +153,14 @@
                                     <%@include file="reclamoCliente/registroreclamo.jsp" %>
 
                                     <%}%>
+                                    <%if(op.equals("actializarpro")){%>
+                                    <%@include file="administrador/actualizarStock.jsp" %>
+
+                                    <%}%>
+                                    <%if(op.equals("registrarpro")){%>
+                                    <%@include file="administrador/nuevoProducto.jsp" %>
+
+                                    <%}%>
 
                                     <%}else{%>
                                      <%@include file="prueba.jsp" %>
@@ -159,7 +179,7 @@
          <div class="container">
          
             <div class="copy text-center">
-               Copyright 2014 <a href='#'>Website</a>
+               Copyright 2017 el Gurpo , todos los derechos reservados.
             </div>
             
          </div>
