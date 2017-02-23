@@ -4,7 +4,7 @@
     <div class="content-box-large">
 
         <div class="panel-body">
-            <form class="form-horizontal" role="form" action="registrarProductoServlet">
+            <form class="form-horizontal" role="form" id="formularioRegistrarProducto" onsubmit="return validarFormulario();" action="registrarProductoServlet">
                 <fieldset>
                     <legend>Nuevo Producto</legend>
                     <div class="form-group">
@@ -117,6 +117,16 @@ $(document).ready(function() {
 
 } );
 
+function validarFormulario(){
+    var values = [];
+    $("input[name='idComponentes']").each(function() {
+        values.push($(this).val());
+    });
+    if(values.length === 0){
+        alert("Debe registrar al menos un componente");
+        return false;
+    }
+}
 function agregarComponente(idComponente, nombre, concentracion, unidad){
 
     var filas = document.getElementById("tableListaComponentes").rows.length;

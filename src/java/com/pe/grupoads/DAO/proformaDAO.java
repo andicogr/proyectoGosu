@@ -10,6 +10,7 @@ import com.pe.grupoads.beans.clienteBeans;
 import com.pe.grupoads.beans.detalleProformaBeans;
 import com.pe.grupoads.beans.productoBeans;
 import com.pe.grupoads.beans.proformaBeans;
+import com.pe.grupoads.beans.usuarioBeans;
 import com.pe.grupoads.conexion.conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -81,7 +82,7 @@ public class proformaDAO {
  
         try{
             String sql = "select p.codproforma, p.importeproforma, p.fechaemisionproforma from proforma p "
-                    + "where  p.estado = 'emitido'";
+                    + "where  p.estado = 'emitido' order by p.codproforma desc";
             PreparedStatement  ps=cn.prepareStatement(sql);
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
@@ -110,7 +111,7 @@ public class proformaDAO {
         cn= conexion.abrir();
  
         try{
-            String sql = "select p.codproforma, p.importeproforma, p.fechaemisionproforma, p.estado from proforma p "
+            String sql = "select p.codproforma, p.importeproforma, p.fechaemisionproforma, p.estado, p.codigousuario from proforma p "
                     + "where  p.codproforma = " + idProforma;
             PreparedStatement  ps=cn.prepareStatement(sql);
             ResultSet rs=ps.executeQuery();
@@ -121,6 +122,9 @@ public class proformaDAO {
                 proforma.setInportePorforma(rs.getDouble(2));
                 proforma.setFechaEmision(rs.getDate(3));
                 proforma.setEstado(rs.getString(4));
+                usuarioBeans user = new usuarioBeans();
+                user.setCODIGOUSUARIO(rs.getInt(5));
+                proforma.setUsuario(user);
                 ArrayList<detalleProformaBeans> detalle = obtenerDetalleProformasPorId(rs.getInt(1));
                 proforma.setDetalle(detalle);
             }
@@ -189,6 +193,7 @@ public class proformaDAO {
 
              ps.executeUpdate();
              actualizarStock(idProforma);
+             insertarBoleta(idProforma);
         } catch (SQLException ex) {
            System.out.println("Error en pagarProforma " + ex);
         }
@@ -212,5 +217,58 @@ public class proformaDAO {
         }
     }
     
+    public static Integer insertarBoleta(Integer idProforma){
+        Connection cn = conexion.abrir();
+        Integer idBoleta = null;
+        proformaBeans proforma = obtenerProformaPorId(idProforma);
+        try {
+            String sql = "insert into boleta(codusuario, importe, estadoboleta, fechaemisionboleta, codcliente) values(?,?,?,?,?)";
+            PreparedStatement ps =  cn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            Integer codigoCliente = 0;
+            if(proforma.getCliente()!= null && proforma.getCliente().getCodCliente() != null){
+                codigoCliente = proforma.getCliente().getCodCliente();
+            }
+            ps.setInt(1, proforma.getUsuario().getCODIGOUSUARIO());
+            ps.setDouble(2, proforma.getInportePorforma());
+            ps.setString(3, proforma.getEstado());
+            java.sql.Date sqlDate = new java.sql.Date(proforma.getFechaEmision().getTime());
+            ps.setDate(4, sqlDate);
+            ps.setInt(5, codigoCliente);
+            ps.executeUpdate();
+
+            ResultSet rs = ps.getGeneratedKeys();
+            if(rs.next()){
+                idBoleta = rs.getInt(1);
+                
+                for(detalleProformaBeans x: proforma.getDetalle()){
+                    insertarBoletaDetalle(x, idBoleta);
+                }
+                
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("Error en insertarBoleta " + ex);
+        }
+        return idBoleta;
+    }
+    
+    public static void insertarBoletaDetalle(detalleProformaBeans detalle, Integer codigoBoleta){
+        Connection cn = conexion.abrir();
+        try {
+            PreparedStatement ps =  cn.prepareStatement("insert into detalleboleta(codboleta, codproducto, cantidadboleta, preciounitario, precioboleta) values(?,?,?,?,?)");
+
+            ps.setInt(1, codigoBoleta);
+            ps.setInt(2, detalle.getCodProducto());
+            ps.setInt(3, detalle.getCantidad());
+            ps.setDouble(4, detalle.getPrecioUnitario());
+            ps.setDouble(5, detalle.getPrecioTotal());
+            
+
+            ps.executeUpdate();
+        
+        } catch (SQLException ex) {
+            System.out.println("Error en insertarBoletaDetalle " + ex);
+        }
+    }
     
 }

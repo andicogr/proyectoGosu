@@ -23,7 +23,7 @@
                   <div class="form-group">
                     <label for="cantidadProducto" class="col-sm-2 control-label">Cantidad</label>
                     <div class="col-sm-2">
-                        <input type="text" class="form-control" value="1" name="cantidadProducto" id="cantidadProducto">
+                        <input type="text" class="form-control" onkeypress='return event.charCode >= 48 && event.charCode <= 57' value="1" name="cantidadProducto" id="cantidadProducto">
                     </div>
                   </div>
                 </fieldset>
@@ -145,6 +145,11 @@ function seleccionarProductoPrincipal() {
   var idProducto = $("#idProducto").val();
   var stock = parseInt($("#stockTD").html());
   var cantidad = parseInt($("#cantidadProducto").val());
+  
+  if(cantidad === "" || cantidad === null || cantidad < 0 || isNaN(cantidad)){
+      alert("Ingrese una cantida valida");
+      return false;
+  }
 
   if(idProducto === null || idProducto === ""){
       alert("Primero Seleccione un Producto");
@@ -161,6 +166,11 @@ function seleccionarProductoPrincipal() {
 function seleccionarProductoSimilar(idProducto, nombreProducto ,stock, precio) { 
     var cantidad = $("#cantidadProducto").val();
 
+  if(cantidad === "" || cantidad === null || cantidad < 0 || isNaN(cantidad)){
+      alert("Ingrese una cantida valida");
+      return false;
+  }
+  
     if(idProducto === null || idProducto === ""){
         alert("Primero Seleccione un Producto");
         return false;
