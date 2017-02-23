@@ -31,6 +31,7 @@
                             <th><%=x.getInportePorforma() %></th>
                             <th>
                                 <a href="pagarProforma?idProforma=<%=x.getCodProforma() %>" class="btn btn-success" role="button">Pagar</a>
+                                <a href="anularProforma?idProforma=<%=x.getCodProforma() %>" onclick="return confirm('Esta seguro de anular la proforma?')" class="btn btn-danger" role="button">Anular</a>
                             </th>
                         </tr>
                         <%}%>
