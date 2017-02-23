@@ -93,9 +93,9 @@ public class servletReclamo extends HttpServlet {
             
             ArrayList<detalleProformaBeans> detalle = proformaDAO.obtenerDetalleProformasPorId(numeroProforma);
             
-            for(detalleProformaBeans x: detalle){
-                productoDAO.actualizarStockProducto(x.getCodProducto(), x.getCantidad());
-            }
+            //for(detalleProformaBeans x: detalle){
+            //    productoDAO.actualizarStockProducto(x.getCodProducto(), x.getCantidad());
+            //}
 
             response.sendRedirect("inicio.jsp?op=regrecl&msg='"+msg+"'");
              

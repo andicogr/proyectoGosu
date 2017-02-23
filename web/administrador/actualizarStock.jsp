@@ -4,7 +4,7 @@
     <div class="content-box-large">
 
         <div class="panel-body">
-            <form class="form-horizontal" role="form" action="actualizarproducto">
+            <form class="form-horizontal" role="form" id="formularioStock" onsubmit="return validarFormulario();" action="actualizarproducto">
                 <fieldset>
                     <legend>Actualizar Stock</legend>
                     <div class="form-group">
@@ -17,7 +17,7 @@
                     <div class="form-group">
                         <label for="txtCantidad" class="col-sm-2 control-label">Cantidad</label>
                         <div class="col-sm-1">
-                            <input type="text" class="form-control" name="txtCantidad" id="txtCantidad">
+                            <input type="text" class="form-control" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="txtCantidad" id="txtCantidad">
                         </div>
                     </div>				
                 </fieldset>
@@ -70,4 +70,18 @@ $(document).ready(function() {
 
 } );
 
+function validarFormulario(){
+    var x = document.forms["formularioStock"]["selecproducto"].value;
+    if(x === ""){
+        alert("Seleccione un producto valido");
+        return false;
+    }
+    
+    var y = document.forms["formularioStock"]["txtCantidad"].value;
+    if(y === ""){
+        alert("Ingrese una cantidad");
+        return false;
+    }
+    
+}
 </script>

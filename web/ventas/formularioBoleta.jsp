@@ -6,7 +6,7 @@
     <div class="content-box-large">
 
         <div class="panel-body">
-            <form class="form-horizontal" role="form" action="registrarProforma">
+            <form class="form-horizontal" role="form" id="Formulario" onsubmit="return validarFormulario();" action="registrarProforma">
                 <fieldset>
                     <legend>Proforma</legend>
                   <div class="form-group">
@@ -57,7 +57,7 @@
                     <div class="form-group">
 
                         <div class="col-sm-2">
-                            <button type="submit" class="btn btn-primary">Registrar</button>
+                            <input type="submit" class="btn btn-primary" value="Registrar"/>
                         </div>
                     </div>
                 </fieldset>
@@ -88,6 +88,15 @@ $(document).ready(function() {
 
 
 } );
+
+function validarFormulario(){
+    var x = document.forms["Formulario"]["montoTotal"].value;
+    if(x <= 0){
+        alert("No puede registrar una proforma con un monto igual a cero");
+        return false;
+    }
+    
+}
 
 function buscarProducto(){
     window.open("abrirFormularioBuscarProducto","_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=10,left=450,width=800,height=700");

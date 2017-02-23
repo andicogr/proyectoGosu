@@ -10,19 +10,19 @@
                     <div class="form-group">
                         <label for="nombreProducto" class="col-sm-2 control-label">Nombre</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" name="nombreProducto" id="nombreProducto">
+                            <input type="text" class="form-control" required="true" name="nombreProducto" id="nombreProducto">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="precioVenta" class="col-sm-2 control-label">Precio Venta</label>
                         <div class="col-sm-1">
-                            <input type="text" class="form-control" name="precioVenta" id="precioVenta">
+                            <input type="text" class="form-control" required="true" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="precioVenta" id="precioVenta">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="stockInicial" class="col-sm-2 control-label">Stock Inicial</label>
                         <div class="col-sm-1">
-                            <input type="text" class="form-control" name="stockInicial" id="stockInicial">
+                            <input type="text" class="form-control" required="true" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="stockInicial" id="stockInicial">
                         </div>
                     </div>
                     <div class="form-group">
@@ -37,7 +37,7 @@
                     <div class="form-group">
                         <label for="descripcion" class="col-sm-2 control-label">Descripcion</label>
                         <div class="col-sm-6">
-                            <textarea class="form-control" name="descripcion" id="descripcion" rows="5"></textarea>
+                            <textarea class="form-control" name="descripcion" required="true" id="descripcion" rows="5"></textarea>
                         </div>
                     </div>				
                 </fieldset>

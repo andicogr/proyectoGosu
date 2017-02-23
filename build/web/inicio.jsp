@@ -84,7 +84,7 @@
                     <%if(nombrePrivilegio.equals("administrador")){ %>
                         <li class="submenu">
                              <a href="#">
-                                <i class=""></i> Registrar Producto
+                                <i class="glyphicon glyphicon-floppy-disk"></i> Registrar Producto
                                 <span class="caret pull-right"></span>
                              </a>
                              <!-- Sub menu -->
@@ -95,13 +95,23 @@
                         </li>
                     <%}%>
                     <%if(nombrePrivilegio.equals("administrador") || nombrePrivilegio.equals("ventas")){ %>
-                    <li> <a href="inicio.jsp?op=vender_producto">Ventas</a></li>
+                    <li> <a href="inicio.jsp?op=vender_producto">
+                            <i class="glyphicon glyphicon-shopping-cart"></i>
+                            Ventas
+                        </a>
+                    </li>
                     <%}%>
                     <%if(nombrePrivilegio.equals("administrador") || nombrePrivilegio.equals("cajero")){ %>
-                    <li> <a href="inicio.jsp?op=cajero">Caja</a></li>
+                    <li> <a href="inicio.jsp?op=cajero">
+                            <i class="glyphicon glyphicon-euro"></i>
+                            Caja</a></li>
                     <%}%>
                     <%if(nombrePrivilegio.equals("administrador") || nombrePrivilegio.equals("ventas")){ %>
-                    <li> <a href="inicio.jsp?op=regrecl">Reclamo Cliente</a></li>
+                    <li> <a href="inicio.jsp?op=regrecl">
+                            <i class="glyphicon glyphicon-thumbs-down"></i>
+                            Reclamo Cliente
+                        </a>
+                    </li>
                     <%}%>
 
                 </ul>
